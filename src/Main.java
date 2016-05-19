@@ -104,6 +104,63 @@ public class Main {
         return temp;
     }
 
+    static String follow(int i, String[][] grmr, Automat automat, String fst[])
+    {
+        int ntlen = automat.getNeterminaly().size();
+        char pro[],chr[];
+        String [] flw = new String[20];
+        String temp="";
+        int j,k,l,m,n,found=0;
+        if(i==0)
+            temp="nema zmysel";
+        for(j=0;j<ntlen;j++)
+        {
+            for(k=0;k<grmr[j].length;k++) //entering grammar matrix
+            {
+                pro=new char[grmr[j][k].length()];
+                pro=grmr[j][k].toCharArray();
+                for(l=0;l<pro.length;l++) //entering each production
+                {
+                    if(pro[l]==automat.getNeterminaly().get(i).charAt(0)) //finding the nonterminal whose follow set is to be found
+                    {
+                        if(l==pro.length-1) //if it is the last terminal/non-terminal then follow of current non-terminal
+                        {
+                            if(j<i)
+                                temp=temp+flw[j];
+                        }
+                        else
+                        {
+                            for(m=0;m<ntlen;m++)
+                            {
+                                if(pro[l+1]==automat.getNeterminaly().get(m).charAt(0)) //first of next non-terminal otherwise (else later�)
+                                {
+                                    chr=new char[fst[m].length()];
+                                    chr=fst[m].toCharArray();
+                                    for(n=0;n<chr.length;n++)
+                                    {
+                                        if(chr[n]=='9') //if first includes epsilon
+                                        {
+                                            if(l+1==pro.length-1)
+                                                temp=temp+follow(j, grmr, automat, fst); //when non-terminal is second last
+                                            else
+                                                temp=temp+follow(m, grmr, automat, fst);
+                                        }
+                                        else
+                                            temp=temp+chr[n]; //include whole first set except epsilon
+                                    }
+                                    found=1;
+                                }
+                            }
+                            if(found!=1)
+                                temp=temp+pro[l+1]; //follow set will include terminal(else is here)
+                        }
+                    }
+                }
+            }
+        }
+        return temp;
+    }
+
 
     public static String removeDuplicates(String str){
         int i;

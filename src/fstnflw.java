@@ -68,7 +68,7 @@ class fstnflw
                 }
                 if(found==1)
                 {
-                    if(str.contains("9")) //here epsilon will lead to next nonterminal’s first set
+                    if(str.contains("9")) //here epsilon will lead to next nonterminalï¿½s first set
                         continue;
                 }
                 else //if first set includes terminal
@@ -81,6 +81,7 @@ class fstnflw
     static String follow(int i)
     {
         char pro[],chr[];
+        String flw[] = new String[20];
         String temp="";
         int j,k,l,m,n,found=0;
         if(i==0)
@@ -104,7 +105,7 @@ class fstnflw
                         {
                             for(m=0;m<ntlen;m++)
                             {
-                                if(pro[l+1]==ntermnl[m]) //first of next non-terminal otherwise (else later…)
+                                if(pro[l+1]==ntermnl[m]) //first of next non-terminal otherwise (else laterï¿½)
                                 {
                                     chr=new char[fst[m].length()];
                                     chr=fst[m].toCharArray();
