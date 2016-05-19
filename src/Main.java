@@ -13,6 +13,7 @@ public class Main {
         char ntermnl[],termnl[];
         int ntlen,tlen;
         String [][]grmr;
+        int count = 0;
         String fst[];
         String flw[];
         String ntPravidlaPocet[] = null;
@@ -48,8 +49,9 @@ public class Main {
         grmr = new String[automat.getNeterminaly().size()][5];
         for(int i=0; i<pocetPravidiel.length; i++){
             for(int k=0;k<pocetPravidiel[i];k++) {
-                String[] parts = automat.getPravidla().get(i+k).split(">");
+                String[] parts = automat.getPravidla().get(count).split(">");
                 grmr[i][k] = parts[1];
+                count++;
             }
         }
 
@@ -67,8 +69,6 @@ public class Main {
         for(int i=0;i<ntlen;i++) {
             System.out.println(removeDuplicates(fst[i]));
         }
-
-
 
     }
 
